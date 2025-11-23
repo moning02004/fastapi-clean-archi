@@ -1,0 +1,8 @@
+from app.core.commons.repository import Repository
+from app.core.password import hash_password
+
+from app.modules.{module_name}.infrastructure.models import {module_class}
+
+
+class {module_class}Repository(Repository):
+    DB_MODEL = {module_class}
