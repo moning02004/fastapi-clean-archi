@@ -6,7 +6,13 @@
 fastapi-setup
 ```
 
-
+- --help 를 통해 명령어를 확인할 수 있습니다.
 ```bash
 python3 manage.py --help
+```
+
+### 커스텀 명령어 추가 방법
+- `{PROJECT_DIR}/managements/commands/` 아래 Command 를 상속받아 명령어를 추가할 수 있습니다.
+```bash
+python3 manage.py {command_name}
 ```
