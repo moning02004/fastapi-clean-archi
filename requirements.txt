@@ -1,9 +1,0 @@
-fastapi
-uvicorn
-SQLAlchemy
-PyJWT
-pytest
-alembic
-pydantic
-python-dotenv
-bcrypt==4.0.1
