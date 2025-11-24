@@ -17,7 +17,10 @@ def auto_register_commands():
 
 
 def register_custom_commands():
-    import managements.commands as commands
+    try:
+        import managements.commands as commands
+    except ImportError:
+        return
 
     for _, mod, _ in pkgutil.iter_modules(commands.__path__):
         importlib.import_module(f"managements.commands.{{mod}}")
