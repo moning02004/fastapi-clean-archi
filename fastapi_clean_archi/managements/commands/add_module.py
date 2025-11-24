@@ -2,9 +2,9 @@ from importlib import resources
 
 import typer
 
-from fastapi_structure.managements.commands.base import Command, copy_files
+from fastapi_clean_archi.managements.commands.base import Command, copy_files
 
-template_dir = resources.files("fastapi_structure.managements.templates")
+template_dir = resources.files("fastapi_clean_archi.managements.templates")
 
 
 class AddModule(Command):

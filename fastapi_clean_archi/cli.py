@@ -2,9 +2,9 @@ import secrets
 from importlib import resources
 from pathlib import Path
 
-from fastapi_structure.managements.commands.base import copy_files, copy_file, run_alembic
+from fastapi_clean_archi.managements.commands.base import copy_files, copy_file, run_alembic
 
-template_dir = resources.files("fastapi_structure.managements.templates")
+template_dir = resources.files("fastapi_clean_archi.managements.templates")
 
 
 def edit_file(filename, remove_line_words, add_lines):

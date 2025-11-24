@@ -1,4 +1,4 @@
-from fastapi_structure.managements.commands.base import run_alembic, Command
+from fastapi_clean_archi.managements.commands.base import run_alembic, Command
 
 
 class Migrate(Command):

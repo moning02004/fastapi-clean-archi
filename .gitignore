@@ -9,4 +9,4 @@ migrations
 alembic.ini
 
 dist
-fastapi_structure.*
+fastapi_clean_archi.*

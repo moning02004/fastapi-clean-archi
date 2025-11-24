@@ -3,27 +3,26 @@ requires = ["setuptools>=61.0"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "fastapi-structure"
-version = "0.3.2"
-description = "Command-driven FastAPI"
+name = "fastapi-clean-archi"
+version = "0.4.0"
+description = "FastAPI with clean architecture"
 authors = [{name="YuJeonghoon", email="moning02004@naver.com"}]
 readme = "README.md"
 requires-python = ">=3.8"
 dependencies = [
-    "fastapi",
+    "fastapi>=0.121.3",
     "uvicorn",
     "SQLAlchemy",
     "PyJWT",
     "pytest",
     "alembic",
-    "pydantic",
     "python-dotenv",
     "bcrypt==4.0.1",
     "typer"
 ]
 
 [project.scripts]
-fastapi-setup = "fastapi_structure.cli:create_core"
+fastapi-setup = "fastapi_clean_archi.cli:create_core"
 
 [tool.setuptools.packages.find]
-include = ["fastapi_structure*"]
+include = ["fastapi_clean_archi*"]

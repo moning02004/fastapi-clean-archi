@@ -1,6 +1,6 @@
 import typer
 
-from fastapi_structure.managements.commands.base import Command, run_alembic
+from fastapi_clean_archi.managements.commands.base import Command, run_alembic
 
 
 class Makemigrations(Command):

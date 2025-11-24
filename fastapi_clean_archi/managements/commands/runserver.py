@@ -1,7 +1,7 @@
 import typer
 import uvicorn
 
-from fastapi_structure.managements.commands.base import Command
+from fastapi_clean_archi.managements.commands.base import Command
 
 
 class Runserver(Command):
