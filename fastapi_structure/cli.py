@@ -7,6 +7,17 @@ from fastapi_structure.managements.commands.base import copy_files, copy_file, r
 template_dir = resources.files("fastapi_structure.managements.templates")
 
 
+def edit_file(filename, remove_line_words, add_lines):
+    path = Path(filename)
+    lines = path.read_text().splitlines()
+
+    for index in range(len(lines)):
+        for x in remove_line_words:
+            if lines[index].startswith(x):
+                lines[index] = ""
+    path.write_text("\n".join(lines[:19] + add_lines + lines[19:]))
+
+
 def create_core():
     secret_key = secrets.token_urlsafe(32)
     copy_files(source_dir=Path(f"{template_dir}/core"),
@@ -19,3 +30,14 @@ def create_core():
     copy_file(file_path=Path(f"{template_dir}/manage.tmpl"),
               new_file_path=Path("./manage.py"))
     run_alembic("alembic init migrations")
+
+    edit_file("./alembic.ini", remove_line_words=["sqlalchemy.url"], add_lines=[])
+    edit_file("./migrations/env.py", remove_line_words=["target_metadata = "], add_lines=[
+        "",
+        "from app.core.config import settings",
+        "config.set_main_option(\"sqlalchemy.url\", settings.DATABASE_URL)",
+        "",
+        "from app.core.db.base import BaseModel",
+        "target_metadata = BaseModel.metadata"
+        "",
+    ])

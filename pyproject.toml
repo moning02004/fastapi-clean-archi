@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "fastapi-structure"
-version = "0.3.0"
+version = "0.3.2"
 description = "Command-driven FastAPI"
 authors = [{name="YuJeonghoon", email="moning02004@naver.com"}]
 readme = "README.md"
