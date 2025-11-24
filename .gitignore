@@ -2,3 +2,11 @@
 sqlite3.db
 vcs.xml
 .idea
+
+app
+main.py
+migrations
+alembic.ini
+
+dist
+fastapi_structure.*
