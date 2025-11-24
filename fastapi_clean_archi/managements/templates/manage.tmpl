@@ -10,7 +10,7 @@ command_app = typer.Typer()
 def auto_register_commands():
     import fastapi_clean_archi.managements.commands as commands
     for _, mod, _ in pkgutil.iter_modules(commands.__path__):
-        importlib.import_module(f"fastapi_clean_archi.managements.commands.{mod}")
+        importlib.import_module(f"fastapi_clean_archi.managements.commands.{{mod}}")
         for cls in Command.__subclasses__():
             command_class = cls()
             command_app.command(command_class.name)(command_class.execute)
@@ -20,7 +20,7 @@ def register_custom_commands():
     import managements.commands as commands
 
     for _, mod, _ in pkgutil.iter_modules(commands.__path__):
-        importlib.import_module(f"managements.commands.{mod}")
+        importlib.import_module(f"managements.commands.{{mod}}")
         for cls in Command.__subclasses__():
             command_class = cls()
             command_app.command(command_class.name)(command_class.execute)
