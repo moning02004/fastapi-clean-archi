@@ -6,6 +6,7 @@ build-backend = "setuptools.build_meta"
 name = "fastapi-clean-archi"
 version = "0.4.6"
 description = "FastAPI with clean architecture"
+license = {file = "LICENSE"}
 authors = [{name="YuJeonghoon", email="moning02004@naver.com"}]
 readme = "README.md"
 requires-python = ">=3.8"
