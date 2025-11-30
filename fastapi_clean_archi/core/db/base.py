@@ -10,9 +10,7 @@ Base = declarative_base()
 class BaseModel(Base):
     __abstract__ = True
 
-    pk = Column("id", Integer, primary_key=True, index=True)
     hash_id = Column(String(100), nullable=False, unique=True)
-
     created_at = Column(DateTime(timezone=True), server_default=func.now(), nullable=False)
     updated_at = Column(DateTime(timezone=True), server_default=func.now(), onupdate=func.now(), nullable=False)
 
@@ -23,9 +21,20 @@ class BaseModel(Base):
             return meta.db_table
         return cls.__name__.lower()
 
+    @declared_attr
+    def pk(cls):
+        for attr in cls.__dict__.values():
+            if isinstance(attr, Column) and attr.primary_key:
+                return Column("id", Integer, index=True, unique=True, autoincrement=True)
+        return Column("id", Integer, primary_key=True, index=True, unique=True, autoincrement=True)
+
 
 @event.listens_for(Session, "before_flush")
 def generate_hash_id(session, flush_context, instances):
     for instance in session.new:
         if instance.hash_id is None:
-            instance.hash_id = str(uuid.uuid4().hex)
+            if getattr(instance, "user_id"):
+                hash_id = str(uuid.uuid3(uuid.NAMESPACE_OID, f"{instance.user_id}_{instance.pk}").hex)
+            else:
+                hash_id = str(uuid.uuid4().hex)
+            instance.hash_id = hash_id
