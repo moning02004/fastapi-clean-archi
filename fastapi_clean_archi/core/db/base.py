@@ -33,7 +33,7 @@ class BaseModel(Base):
 def generate_hash_id(session, flush_context, instances):
     for instance in session.new:
         if instance.hash_id is None:
-            if getattr(instance, "user_id"):
+            if hasattr(instance, "user_id"):
                 hash_id = str(uuid.uuid3(uuid.NAMESPACE_OID, f"{instance.user_id}_{instance.pk}").hex)
             else:
                 hash_id = str(uuid.uuid4().hex)

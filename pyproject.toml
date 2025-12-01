@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "fastapi-clean-archi"
-version = "0.7.2"
+version = "0.7.3"
 description = "FastAPI with clean architecture"
 license = {file = "LICENSE"}
 authors = [{name="YuJeonghoon", email="moning02004@naver.com"}]
@@ -21,7 +21,8 @@ dependencies = [
     "python-dotenv",
     "bcrypt==4.0.1",
     "typer",
-    "httpx"
+    "httpx",
+    "argon2_cffi"
 ]
 
 [project.scripts]
