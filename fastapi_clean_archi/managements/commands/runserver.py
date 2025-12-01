@@ -23,7 +23,7 @@ class Runserver(Command):
         except ModuleNotFoundError:
             raise ModuleNotFoundError("app.core.config 모듈을 찾을 수 없습니다.")
 
-        if not validate_database_url(settings["DATABASE_URL"]):
+        if not settings["DATABASE_URL"] or not validate_database_url(settings["DATABASE_URL"]):
             raise ConnectionError("데이터베이스에 연결할 수 없습니다. DATABASE_URL 설정을 확인해주세요.")
 
         app_name = settings["APP_NAME"]
