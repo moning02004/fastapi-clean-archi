@@ -1,3 +1,5 @@
+import os
+
 import typer
 import uvicorn
 
@@ -8,10 +10,11 @@ class Runserver(Command):
     name = "runserver"
     help = "FastAPI server 가 실행됩니다."
 
-    def execute(self, host_port=typer.Argument(None), host=typer.Argument("localhost"), port=typer.Argument("8000")):
+    def execute(self, host_port=typer.Argument(None), host=typer.Argument("localhost"), port=typer.Argument("8000"), settings_env=typer.Argument(".env")):
         if host_port:
             host, port = host_port.split(":")
         else:
             host, port = host, port
 
+        os.environ.setdefault("SETTINGS_ENV", settings_env)
         uvicorn.run("main:app", host=host, port=int(port), reload=True)

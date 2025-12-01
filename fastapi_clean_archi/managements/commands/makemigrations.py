@@ -3,7 +3,7 @@ import typer
 from fastapi_clean_archi.managements.commands.base import Command, run_alembic
 
 
-class Makemigrations(Command):
+class MakeMigrations(Command):
     name = "makemigrations"
     help = "db migration 파일을 생성합니다."
 
