@@ -2,6 +2,7 @@ import abc
 import os
 import subprocess
 from abc import ABC
+from pathlib import Path
 
 from sqlalchemy import create_engine, text
 from sqlalchemy.exc import SQLAlchemyError
@@ -13,7 +14,7 @@ def validate_database_url(database_url: str) -> bool:
         with engine.connect() as conn:
             conn.execute(text("SELECT 1"))
         return True
-    except SQLAlchemyError as e:
+    except SQLAlchemyError:
         return False
 
 
@@ -24,6 +25,20 @@ class Command(ABC):
     @abc.abstractmethod
     def execute(self):
         raise NotImplementedError
+
+
+def edit_file(filename, remove_line_words, add_lines, line_number):
+    path = Path(filename)
+    lines = path.read_text().splitlines()
+
+    for index in range(len(lines)):
+        for x in remove_line_words:
+            if lines[index].startswith(x):
+                lines[index] = ""
+    if line_number >= 0:
+        path.write_text("\n".join(lines[:line_number] + add_lines + lines[line_number:]))
+    else:
+        path.write_text("\n".join(lines + add_lines))
 
 
 def run_alembic(alembic_command: str):

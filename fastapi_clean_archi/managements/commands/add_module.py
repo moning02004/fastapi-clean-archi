@@ -4,7 +4,7 @@ from pathlib import Path
 
 import typer
 
-from fastapi_clean_archi.managements.commands.base import Command, copy_files, copy_file
+from fastapi_clean_archi.managements.commands.base import Command, copy_files, copy_file, edit_file
 
 template_dir = resources.files("fastapi_clean_archi.managements.templates")
 
@@ -25,4 +25,4 @@ class AddModule(Command):
         if not os.path.exists("./app/modules/__init__.py"):
             copy_file(file_path=Path(f"{template_dir}/__init__.tmpl"),
                       new_file_path=Path("./app/modules/__init__.py"))
-
+        print(f"✅ Module '{module_name}' has been created successfully.")

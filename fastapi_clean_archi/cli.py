@@ -4,20 +4,9 @@ import secrets
 from importlib import resources
 from pathlib import Path
 
-from fastapi_clean_archi.managements.commands.base import copy_files, copy_file, run_alembic
+from fastapi_clean_archi.managements.commands.base import copy_files, copy_file, run_alembic, edit_file
 
 template_dir = resources.files("fastapi_clean_archi.managements.templates")
-
-
-def edit_file(filename, remove_line_words, add_lines, line_number):
-    path = Path(filename)
-    lines = path.read_text().splitlines()
-
-    for index in range(len(lines)):
-        for x in remove_line_words:
-            if lines[index].startswith(x):
-                lines[index] = ""
-    path.write_text("\n".join(lines[:line_number] + add_lines + lines[line_number:]))
 
 
 def create_core():
@@ -57,3 +46,14 @@ def create_core():
         "target_metadata = BaseModel.metadata"
         "",
     ], line_number=19)
+    edit_file("./main.py", remove_line_words=[], add_lines=[
+        "",
+        "import os, importlib",
+        "modules = os.listdir(\"app/modules\")",
+        "for module in modules:",
+        "    try:",
+        "        importlib.import_module(f\"app.modules.{module}.infrastructure.models\")",
+        "    except ModuleNotFoundError:",
+        "        continue",
+        "",
+    ], line_number=6)
