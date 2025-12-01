@@ -3,6 +3,20 @@ import os
 import subprocess
 from abc import ABC
 
+from sqlalchemy import create_engine
+from sqlalchemy.exc import SQLAlchemyError
+
+
+def validate_database_url(database_url: str) -> bool:
+    try:
+        engine = create_engine(database_url)
+        with engine.connect() as conn:
+            conn.execute("SELECT 1")
+        return True
+    except SQLAlchemyError as e:
+        print("DB connection failed:", e)
+        return False
+
 
 class Command(ABC):
     name: str = None
