@@ -19,7 +19,7 @@ class Runserver(Command):
         os.environ.setdefault("SETTINGS_ENV", settings_env)
         try:
             module = importlib.import_module("app.core.config")
-            settings = module.settings.dict()
+            settings = module.settings.export()
         except ModuleNotFoundError:
             raise ModuleNotFoundError("app.core.config 모듈을 찾을 수 없습니다.")
 

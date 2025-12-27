@@ -23,5 +23,10 @@ class AbstractSettings(BaseSettings):
             f"@{db['host']}:{db['port']}/{db['name']}"
         )
 
+    def export(self):
+        data = self.dict()
+        data["DATABASE_URL"] = self.DATABASE_URL
+        return data
+
     class Config:
         env_file = os.environ.get("SETTINGS_ENV", ".env")
