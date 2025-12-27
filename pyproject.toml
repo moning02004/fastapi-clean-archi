@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "fastapi-clean-archi"
-version = "0.7.5"
+version = "0.7.6"
 description = "FastAPI with clean architecture"
 license = {file = "LICENSE"}
 authors = [{name="YuJeonghoon", email="moning02004@naver.com"}]
