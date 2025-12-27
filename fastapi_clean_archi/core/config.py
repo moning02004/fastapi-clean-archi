@@ -13,11 +13,15 @@ class AbstractSettings(BaseSettings):
         "port": "",
     }
 
-    DATABASE_URL: str = (
-        f"{DATABASE['driver']}:///{DATABASE['name']}"
-        if DATABASE["driver"] == "sqlite"
-        else f"{DATABASE['driver']}://{DATABASE['user']}:{DATABASE['password']}@{DATABASE['host']}:{DATABASE['port']}/{DATABASE['name']}"
-    )
+    @property
+    def DATABASE_URL(self) -> str:
+        db = self.DATABASE
+        if db["driver"] == "sqlite":
+            return f"{db['driver']}:///{db['name']}"
+        return (
+            f"{db['driver']}://{db['user']}:{db['password']}"
+            f"@{db['host']}:{db['port']}/{db['name']}"
+        )
 
     class Config:
         env_file = os.environ.get("SETTINGS_ENV", ".env")
